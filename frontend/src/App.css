@@ -1,0 +1,75 @@
+/* App.css */
+
+/* Mobile First Styles */ 
+.app-container {
+  padding: 15px;
+  background: linear-gradient(to right, #5510c4, #704cc4);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.converter-card, .history-card {
+  background-color: #f5efef36;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.text-center {
+  text-align: center;
+  color: #fff8f8;
+}
+
+.btn-primary {
+  background-color: #5510c4;
+  border: none;
+  color: #fff8f8;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:disabled {
+  background-color: #755af0;
+}
+
+.list-group-item {
+  border: 1px solid #752aec;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.form-control {
+  border-radius: 5px;
+  
+}
+
+/* Tablet and Larger Screens */
+@media (min-width: 576px) {
+  .app-container {
+      padding: 20px;
+      
+  }
+
+  .converter-card, .history-card {
+      padding: 30px;
+      
+  }
+}
+
+@media (min-width: 768px) {
+  .row {
+      display: flex;
+      flex-wrap: wrap;
+      color: #fff8f8;
+  }
+
+  .col-12.col-md-5, .col-12.col-md-2 {
+      flex: 1;
+      margin-right: 15px;
