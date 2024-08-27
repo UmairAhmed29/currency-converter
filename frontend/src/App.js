@@ -100,4 +100,13 @@ function App() {
                 <ul className="list-group">
                     {history.map((entry, index) => (
                         <li key={index} className="list-group-item">
-                            {`${entry.amount} ${entry.baseCurrency} to
+                            {`${entry.amount} ${entry.baseCurrency} to ${entry.targetCurrency} = ${entry.convertedAmount} on ${entry.date}`}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
+}
+
+export default App;

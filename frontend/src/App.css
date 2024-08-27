@@ -73,3 +73,22 @@
   .col-12.col-md-5, .col-12.col-md-2 {
       flex: 1;
       margin-right: 15px;
+      
+  }
+
+  .col-12.col-md-2 {
+      margin-right: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .app-container {
+      padding: 30px;
+      
+  }
+
+  .converter-card, .history-card {
+      padding: 40px;
+      
+  }
+}
