@@ -10,21 +10,16 @@ function App() {
     const [convertedAmount, setConvertedAmount] = useState(null);
     const [history, setHistory] = useState(() => JSON.parse(localStorage.getItem('history')) || []);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null); // Added error state
 
     useEffect(() => {
         // Fetch available currencies on mount
-        axios.get('http://localhost:5000//api/currencies')
+        axios.get('http://localhost:5000/api/currencies')
             .then(response => setCurrencies(Object.keys(response.data)))
-            .catch(error => {
-                console.error('Error fetching currencies:', error);
-                setError('Error fetching currencies'); // Set error state
-            });
+            .catch(error => console.error('Error fetching currencies:', error));
     }, []);
 
     const handleConvert = async () => {
         setLoading(true);
-        setError(null); // Clear any previous error
         try {
             const response = await axios.post('http://localhost:5000/api/convert', {
                 base_currency: baseCurrency,
@@ -47,7 +42,6 @@ function App() {
             localStorage.setItem('history', JSON.stringify(updatedHistory));
         } catch (error) {
             console.error('Error during conversion:', error);
-            setError('Error during conversion'); // Set error state
         } finally {
             setLoading(false);
         }
@@ -56,12 +50,17 @@ function App() {
     return (
         <div className="app-container">
             <div className="converter-card">
-                <h1 className="text-center mb-4"  >Currency Converter</h1>
+                <h1 className="text-center mb-4">Currency Converter</h1>
                 <div className="card-body">
                     <div className="row">
                         <div className="col-12 col-md-5 mb-3">
                             <label htmlFor="baseCurrency">From:</label>
-                            <select className="form-control" value={baseCurrency} onChange={e => setBaseCurrency(e.target.value)}>
+                            <select
+                                id="baseCurrency"
+                                className="form-control"
+                                value={baseCurrency}
+                                onChange={e => setBaseCurrency(e.target.value)}
+                            >
                                 {currencies.map(currency => (
                                     <option key={currency} value={currency}>
                                         {currency}
@@ -71,7 +70,12 @@ function App() {
                         </div>
                         <div className="col-12 col-md-5 mb-3">
                             <label htmlFor="targetCurrency">To:</label>
-                            <select className="form-control" value={targetCurrency} onChange={e => setTargetCurrency(e.target.value)}>
+                            <select
+                                id="targetCurrency"
+                                className="form-control"
+                                value={targetCurrency}
+                                onChange={e => setTargetCurrency(e.target.value)}
+                            >
                                 {currencies.map(currency => (
                                     <option key={currency} value={currency}>
                                         {currency}
@@ -82,6 +86,7 @@ function App() {
                         <div className="col-12 col-md-2 mb-3">
                             <label htmlFor="amount">Amount:</label>
                             <input
+                                id="amount"
                                 type="number"
                                 className="form-control"
                                 value={amount}
@@ -94,7 +99,7 @@ function App() {
                             {loading ? 'Converting...' : 'Convert'}
                         </button>
                     </div>
-                    {convertedAmount && (
+                    {convertedAmount !== null && (
                         <div className="text-center mt-4">
                             <h4>{`${amount} ${baseCurrency} = ${convertedAmount} ${targetCurrency}`}</h4>
                         </div>

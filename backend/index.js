@@ -3,18 +3,17 @@ import Freecurrencyapi from '@everapi/freecurrencyapi-js';
 import cors from 'cors';
 
 const app = express();
+const port = 5000;
 
 // Middleware
-app.use(cors({
-    origin: 'https://currency-converter-phi-flax.vercel.app', // Allow requests from this origin
-}));
+app.use(cors());
 app.use(express.json());
 
 // Initialize the currency API client
 const currencyClient = new Freecurrencyapi("4E0VK7BnkdeUuh1vegAt808v2IUjzUR6lxcvBMT2");
 
 // Route to get the list of currencies
-app.get('/api/currencies', async (req, res) => {
+app.get('https://currency-converter-vz5i.vercel.app/api/currencies', async (req, res) => {
   try {
     const response = await currencyClient.currencies();
     res.json(response.data);
@@ -25,8 +24,9 @@ app.get('/api/currencies', async (req, res) => {
 });
 
 // Route to convert currency
-app.post('/api/convert', async (req, res) => {
+app.post('https://currency-converter-vz5i.vercel.app/api/convert', async (req, res) => {
     const { base_currency, target_currency, amount } = req.body;
+
 
     // Validate input
     if (!base_currency || !target_currency || !amount) {
@@ -39,6 +39,7 @@ app.post('/api/convert', async (req, res) => {
             base_currency,
             currencies: target_currency,
         });
+
 
         const rate = response.data[target_currency];
 
@@ -55,6 +56,7 @@ app.post('/api/convert', async (req, res) => {
     }
 });
 
-app.listen(5000, () => {
-  console.log('Server running on port 5000');
+
+app.listen(port, () => {
+  console.log('Server running on port ${port}');
 });
