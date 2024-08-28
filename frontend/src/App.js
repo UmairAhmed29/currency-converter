@@ -13,7 +13,7 @@ function App() {
 
     useEffect(() => {
         // Fetch available currencies on mount
-        axios.get('http://localhost:5000/api/currencies')
+        axios.get('https://currency-converter-backend-cwx82xgqf.vercel.app/api/currencies')
             .then(response => setCurrencies(Object.keys(response.data)))
             .catch(error => console.error('Error fetching currencies:', error));
     }, []);
@@ -21,7 +21,7 @@ function App() {
     const handleConvert = async () => {
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:5000/api/convert', {
+            const response = await axios.post('https://currency-converter-backend-cwx82xgqf.vercel.app/api/convert', {
                 base_currency: baseCurrency,
                 target_currency: targetCurrency,
                 amount: amount
