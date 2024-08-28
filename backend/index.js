@@ -6,7 +6,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: '*', // Allow all origins
+    origin: 'https://currency-converter-phi-flax.vercel.app', // Allow all origins
 }));
 app.use(express.json());
 
