@@ -6,7 +6,9 @@ const app = express();
 const port = 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: '*', // Allow all origins
+}));
 app.use(express.json());
 
 // Initialize the currency API client
