@@ -10,16 +10,21 @@ function App() {
     const [convertedAmount, setConvertedAmount] = useState(null);
     const [history, setHistory] = useState(() => JSON.parse(localStorage.getItem('history')) || []);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null); // Added error state
 
     useEffect(() => {
         // Fetch available currencies on mount
         axios.get('https://currency-converter-backend-cwx82xgqf.vercel.app/api/currencies')
             .then(response => setCurrencies(Object.keys(response.data)))
-            .catch(error => console.error('Error fetching currencies:', error));
+            .catch(error => {
+                console.error('Error fetching currencies:', error);
+                setError('Error fetching currencies'); // Set error state
+            });
     }, []);
 
     const handleConvert = async () => {
         setLoading(true);
+        setError(null); // Clear any previous error
         try {
             const response = await axios.post('https://currency-converter-backend-cwx82xgqf.vercel.app/api/convert', {
                 base_currency: baseCurrency,
@@ -42,6 +47,7 @@ function App() {
             localStorage.setItem('history', JSON.stringify(updatedHistory));
         } catch (error) {
             console.error('Error during conversion:', error);
+            setError('Error during conversion'); // Set error state
         } finally {
             setLoading(false);
         }
