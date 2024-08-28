@@ -6,7 +6,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: 'https://currency-converter-phi-flax.vercel.app', // Allow all origins
+    origin: 'https://currency-converter-phi-flax.vercel.app', // Allow requests from this origin
 }));
 app.use(express.json());
 
@@ -53,4 +53,8 @@ app.post('/api/convert', async (req, res) => {
         console.error('Error fetching conversion rate:', error.message || error);
         res.status(500).send('Error converting currency');
     }
+});
+
+app.listen(5000, () => {
+  console.log('Server running on port 5000');
 });
