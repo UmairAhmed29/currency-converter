@@ -55,16 +55,13 @@ function App() {
                     <div className="row">
                         <div className="col-12 col-md-5 mb-3">
                             <label htmlFor="baseCurrency">From:</label>
-                            <select className="form-control" value={baseCurrency} onChange={e => setBaseCurrency(e.target.value)} disabled={currencies.length === 0}>
-  {currencies.length === 0 ? <option>Loading...</option> : 
-    currencies.map(currency => (
-      <option key={currency} value={currency}>
-        {currency}
-      </option>
-    ))
-  }
-</select>
-
+                            <select className="form-control" value={baseCurrency} onChange={e => setBaseCurrency(e.target.value)}>
+                                {currencies.map(currency => (
+                                    <option key={currency} value={currency}>
+                                        {currency}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="col-12 col-md-5 mb-3">
                             <label htmlFor="targetCurrency">To:</label>
