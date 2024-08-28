@@ -3,7 +3,6 @@ import Freecurrencyapi from '@everapi/freecurrencyapi-js';
 import cors from 'cors';
 
 const app = express();
-const port = 5000;
 
 // Middleware
 app.use(cors({
@@ -29,7 +28,6 @@ app.get('/api/currencies', async (req, res) => {
 app.post('/api/convert', async (req, res) => {
     const { base_currency, target_currency, amount } = req.body;
 
-
     // Validate input
     if (!base_currency || !target_currency || !amount) {
         return res.status(400).send('Missing required parameters');
@@ -41,7 +39,6 @@ app.post('/api/convert', async (req, res) => {
             base_currency,
             currencies: target_currency,
         });
-
 
         const rate = response.data[target_currency];
 
@@ -56,9 +53,4 @@ app.post('/api/convert', async (req, res) => {
         console.error('Error fetching conversion rate:', error.message || error);
         res.status(500).send('Error converting currency');
     }
-});
-
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
 });
