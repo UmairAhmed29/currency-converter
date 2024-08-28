@@ -19,7 +19,7 @@ app.use(express.json());
 const currencyClient = new Freecurrencyapi("4E0VK7BnkdeUuh1vegAt808v2IUjzUR6lxcvBMT2");
 
 // Route to get the list of currencies
-app.get('https://localhost:5000/api/currencies', async (req, res) => {
+app.get('/api/currencies', async (req, res) => {
   try {
     const response = await currencyClient.currencies();
     res.json(response.data);
@@ -30,7 +30,7 @@ app.get('https://localhost:5000/api/currencies', async (req, res) => {
 });
 
 // Route to convert currency
-app.post('https://localhost:5000/api/convert', async (req, res) => {
+app.post('/api/convert', async (req, res) => {
     const { base_currency, target_currency, amount } = req.body;
 
 
@@ -63,6 +63,4 @@ app.post('https://localhost:5000/api/convert', async (req, res) => {
 });
 
 
-app.listen(port, () => {
-  console.log('Server running on port ${port}');
-});
+app.listen();
